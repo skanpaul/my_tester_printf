@@ -9,38 +9,42 @@
 #    Updated: 2021/11/04 16:34:14 by ski              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-NAME 			= a.out
-
 CC				= gcc
 CFLAGS 			= -Wall -Wextra -Werror
 AR 				= ar rc
 RM				= rm -f 
 NORM			= norminette -R CheckForbiddenSourceHeader
-
-PATH_PRINTF		= ../libftprintf/
-PATH_LIBFT		= ../libftprintf/libft/
-
-SRC_MAIN		= $(wildcard *.c)
-SRC_LIBFT		= $(wildcard ${PATH_LIBFT}*.c)
-SRC_PRINTF		= $(wildcard ${PATH_PRINTF}*.c) 
-
-MK_MAIN			= Makefile
-MK_LIBFT		= ${PATH_LIBFT}Makefile
-MK_PRINTF		= ${PATH_PRINTF}Makefile
-
+# **************************************************************************** #
+NAME 			= a.out
+# ----------------------------------------------------------------------------
+PATH_MAIN		= ./
 HD_MAIN			= main.h
-HD_LIBFT		= ${PATH_LIBFT}libft.h
+SRC_MAIN		= $(wildcard *.c)
+OBJ_MAIN		= ${SRC_MAIN:.c=.o}
+MK_MAIN			= Makefile
+# ----------------------------------------------------------------------------
+PATH_PRINTF		= ../libftprintf/
 HD_PRINTF		= ${PATH_PRINTF}ft_printf.h
+SRC_PRINTF		= $(wildcard ${PATH_PRINTF}*.c) 
+OBJ_PRINTF		= ${SRC_PRINTF:.c=.o}
+MK_PRINTF		= ${PATH_PRINTF}Makefile
+# ----------------------------------------------------------------------------
+PATH_LIBFT		= ../libftprintf/libft/
+HD_LIBFT		= ${PATH_LIBFT}libft.h
+SRC_LIBFT		= $(wildcard ${PATH_LIBFT}*.c)
+OBJ_LIBFT		= ${SRC_LIBFT:.c=.o}
+MK_LIBFT		= ${PATH_LIBFT}Makefile
+# **************************************************************************** #
+PATH_SUBMAKE	= ${PATH_PRINTF}
+SRC_NORM		= ${SRC_MAIN}
+HD_NORM			= ${HD_MAIN}
 
+# **************************************************************************** #
 all: $(NAME)
-# **************************************************************************** #
-# $(NAME): $(OBJ_LIBFT) $(OBJ_PRINTF) $(OBJ_MAIN) 
-#	${CC} $(CFLAGS) $(OBJ_LIBFT) $(OBJ_PRINTF) $(OBJ_MAIN) -o $(NAME)
-$(NAME): $(SRC_MAIN) $(SRC_LIBFT) $(SRC_PRINTF) 
-	${CC} $(CFLAGS) $(SRC_MAIN) $(SRC_LIBFT) $(SRC_PRINTF)  -o $(NAME)
-# **************************************************************************** #
-test:
-	ls $(SRC_PRINTF)
+ $(NAME): $(OBJ_LIBFT) $(OBJ_PRINTF) $(OBJ_MAIN) 
+	${CC} $(CFLAGS) $(OBJ_LIBFT) $(OBJ_PRINTF) $(OBJ_MAIN) -o $(NAME)
+# $(NAME): $(SRC_MAIN) $(SRC_LIBFT) $(SRC_PRINTF) 
+#	${CC} $(CFLAGS) $(SRC_MAIN) $(SRC_LIBFT) $(SRC_PRINTF)  -o $(NAME)
 
 clean: sub_clean
 	${RM} *.o
@@ -52,17 +56,24 @@ re: fclean all sub_re
 
 .PHONY: all clean fclean re
 
+nono: sub_nono
+#	${NORM} ${SRC_NORM}
+#	${NORM} ${HD_NORM}
+
 # **************************************************************************** #
 sub_all:
-	${MAKE} all -C ${PATH_PRINTF}
+	${MAKE} all -C ${PATH_SUBMAKE}
 
 sub_clean:
-	${MAKE} clean -C ${PATH_PRINTF}
+	${MAKE} clean -C ${PATH_SUBMAKE}
 
 sub_fclean:
-	${MAKE} fclean -C ${PATH_PRINTF}
+	${MAKE} fclean -C ${PATH_SUBMAKE}
 
 sub_re:
-	${MAKE} re -C ${PATH_PRINTF}
+	${MAKE} re -C ${PATH_SUBMAKE}
+
+sub_nono:
+	${MAKE} nono -C ${PATH_SUBMAKE}
 
 # **************************************************************************** #
