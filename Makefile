@@ -43,8 +43,6 @@ HD_NORM			= ${HD_MAIN}
 all: $(NAME)
  $(NAME): $(OBJ_LIBFT) $(OBJ_PRINTF) $(OBJ_MAIN) 
 	${CC} $(CFLAGS) $(OBJ_LIBFT) $(OBJ_PRINTF) $(OBJ_MAIN) -o $(NAME)
-# $(NAME): $(SRC_MAIN) $(SRC_LIBFT) $(SRC_PRINTF) 
-#	${CC} $(CFLAGS) $(SRC_MAIN) $(SRC_LIBFT) $(SRC_PRINTF)  -o $(NAME)
 
 clean: sub_clean
 	${RM} *.o
