@@ -3,16 +3,19 @@
 /* ************************************************************************** */
 void test_essai_printf(void)
 {
-	char lettre;
-	char *chain = "ma chaine";
-	int decimal;
+	// char lettre;
+	// char *chain = "ma chaine";
+	// int decimal;
+
+	ft_printf("Le matin il fait %A %d degres\n", -5);
+
 	// 0) printf sans argument
 	// ft_printf("Bonjour biscuit\n");
 	// write(1,"\n", 1);
 
 	// printf("Bonjour biscuit\n");
 	
-	
+/* 	
 // 1) %c imprime un seul caractère.
 	printf("La lettre [%c]\n", 'h');
 	lettre = 'K';
@@ -77,4 +80,5 @@ void test_essai_printf(void)
 // 0) AUTRE TEST
 	printf("Symbole backslach \\ \n");
 	printf("\n");
+	 */
 }

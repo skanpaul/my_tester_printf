@@ -15,7 +15,7 @@ int	main(void)
 {
 	enum e_test the_test;
 
-	the_test = essai_c;
+	the_test = essai;
 
 	printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\n");
 
